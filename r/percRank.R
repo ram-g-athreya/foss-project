@@ -1,0 +1,1 @@
+percRank <- function(x) trunc(rank(x)) / length(x)
