@@ -47,21 +47,18 @@ generateDataset <- function(n, dropout_percentage){
   weightage_vector <- vector('numeric');
   
   for(i in 1:n){
-    gender_weightage = getW(gender_list, Gender, i);
-    poverty_weightage = getW(poverty_list, Poverty, i);
-    rural_weightage = getW(rural_list, Rural, i);
+    gender_weightage <- getW(gender_list, Gender, i);
+    poverty_weightage <- getW(poverty_list, Poverty, i);
+    community_weightage <- getW(community_list, Community, i);
+    rural_weightage <- getW(rural_list, Rural, i);
     
     weightage_vector[i] <- 
       gender_weightage + 
       poverty_weightage + 
-      getW(community_list, Community, i) + 
+      community_weightage + 
       rural_weightage +
       getW(ptr_list, PTR, i) + 
-      getW(scr_list, SCR, i) 
-      #Secondary Factors
-      #gender_weightage * poverty_weightage + 
-      #poverty_weightage * rural_weightage +
-      #gender_weightage * poverty_weightage * rural_weightage
+      getW(scr_list, SCR, i)
     ;
   }
   w_rank <- percRank(weightage_vector);
