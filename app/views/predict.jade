@@ -1,0 +1,109 @@
+doctype html
+html
+    head
+        title Dashboard
+        meta(charset="UTF-8")
+        meta(content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport')
+        link(rel="stylesheet",href="css/bootstrap.min.css",type="text/css")
+        link(rel="stylesheet",href="css/font-awesome.min.css",type="text/css")
+        link(rel="stylesheet",href="css/ionicons.min.css",type="text/css")
+        link(rel="stylesheet",href="css/morris/morris.css",type="text/css")
+        link(rel="stylesheet",href="css/jvectormap/jquery-jvectormap-1.2.2.css",type="text/css")
+        link(rel="stylesheet",href="css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css",type="text/css")
+        link(rel="stylesheet",href="css/AdminLTE.css",type="text/css")
+
+    body(class="skin-blue")
+        header(class="header")
+            a(href="/",class="logo") FOSS Project
+            nav(class="navbar navbar-static-top",role="navigation")
+                a(href="#",class="navbar-btn sidebar-toggle",data-toggle="offcanvas",role="button")
+                    span(class="sr-only") Toggle Navigation
+                    span(class="icon-bar")
+                    span(class="icon-bar")
+                    span(class="icon-bar")
+        div(class="wrapper row-offcanvas row-offcanvas-left")
+            aside(class="left-side sidebar-offcanvas")
+                section(class="sidebar")
+                    ul(class="sidebar-menu")
+                        li
+                            a(href="/")
+                                i(class="fa fa-upload")
+                                span Upload
+                        li
+                            a(href="/predict")
+                                i(class="fa fa-search")
+                                span Predict
+            aside(class="right-side")
+                section(class="content-header")
+                    h1 Predict
+                section
+                    div(class="box box-primary")
+                        form(action="#",enctype="multipart/form-data",method="post",role="form",id="form")
+                            div(class="box-body")
+                                div(class="form-group col-md-2")
+                                    label Gender
+                                    select(class="form-control",name="Gender")
+                                        option(value="Male") Male
+                                        option(value="Female") Female
+                                div(class="form-group col-md-2")
+                                    label Poverty
+                                    select(class="form-control",name="Poverty")
+                                        option(value="Yes") Yes
+                                        option(value="No") No
+                                div(class="form-group col-md-2")
+                                    label Community
+                                    select(class="form-control",name="Community")
+                                        option(value="General") General
+                                        option(value="OBC") OBC
+                                        option(value="SC") SC
+                                        option(value="ST") ST
+                                div(class="form-group col-md-2")
+                                    label Rural
+                                    select(class="form-control",name="Rural")
+                                        option(value="Yes") Yes
+                                        option(value="No") No
+                                div(class="form-group col-md-2")
+                                    label PTR
+                                    select(class="form-control",name="PTR")
+                                        option(value="Low") Low
+                                        option(value="Medium") Medium
+                                        option(value="High") High
+                                div(class="form-group col-md-2")
+                                    label SCR
+                                    select(class="form-control",name="SCR")
+                                        option(value="Low") Low
+                                        option(value="Medium") Medium
+                                        option(value="High") High
+                                div(class="box-footer",style="margin-left: 5px;")
+                                    button(type="button",class="btn btn-primary",id="submit") Predict
+                                    label(id="outcome",style="margin-left: 10px;")
+
+        script(src="js/jquery.js")
+        script(src="js/bootstrap.min.js")
+        script(src="js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js")
+        script(src="js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js")
+        script(src="js/AdminLTE/app.js")
+        script(type="text/javascript").
+            $(document).ready(function(){
+                $('#submit').click(function(){
+                    var json = JSON.stringify($('#form').serializeArray());
+                    $.ajax({
+                        url: '/predict',
+                        method: 'post',
+                        data: {
+                            json: json
+                        },
+                        success: function(response){
+                            var label = $('#outcome');
+                            if(response.indexOf("TRUE") >= 0){
+                                label.css('color', 'red');
+                                label.html('Student will Dropout');
+                            }
+                            else{
+                                label.css('color', 'green');
+                                label.html('Student will Not Dropout');
+                            }
+                        }
+                    });
+                });
+            });

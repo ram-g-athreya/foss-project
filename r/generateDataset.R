@@ -64,5 +64,6 @@ generateDataset <- function(n, dropout_percentage){
   w_rank <- percRank(weightage_vector);
   Dropout <- w_rank >= (1 - dropout_percentage);
   
-  return(data.frame(Gender, Poverty, Community, Rural, PTR, SCR, Dropout));
+  data <- data.frame(Gender, Poverty, Community, Rural, PTR, SCR, Dropout); 
+  write.csv(file="data.csv", x=data)
 }

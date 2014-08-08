@@ -1,0 +1,53 @@
+doctype html
+html
+    head
+        title Dashboard
+        meta(charset="UTF-8")
+        meta(content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport')
+        link(rel="stylesheet",href="css/bootstrap.min.css",type="text/css")
+        link(rel="stylesheet",href="css/font-awesome.min.css",type="text/css")
+        link(rel="stylesheet",href="css/ionicons.min.css",type="text/css")
+        link(rel="stylesheet",href="css/morris/morris.css",type="text/css")
+        link(rel="stylesheet",href="css/jvectormap/jquery-jvectormap-1.2.2.css",type="text/css")
+        link(rel="stylesheet",href="css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css",type="text/css")
+        link(rel="stylesheet",href="css/AdminLTE.css",type="text/css")
+
+    body(class="skin-blue")
+        header(class="header")
+            a(href="/",class="logo") FOSS Project
+            nav(class="navbar navbar-static-top",role="navigation")
+                a(href="#",class="navbar-btn sidebar-toggle",data-toggle="offcanvas",role="button")
+                    span(class="sr-only") Toggle Navigation
+                    span(class="icon-bar")
+                    span(class="icon-bar")
+                    span(class="icon-bar")
+        div(class="wrapper row-offcanvas row-offcanvas-left")
+            aside(class="left-side sidebar-offcanvas")
+                section(class="sidebar")
+                    ul(class="sidebar-menu")
+                        li
+                            a(href="/")
+                                i(class="fa fa-upload")
+                                span Upload
+                        li
+                            a(href="/predict")
+                                i(class="fa fa-search")
+                                span Predict
+            aside(class="right-side")
+                section(class="content-header")
+                    h1 Upload
+                section
+                    div(class="box box-primary")
+                        form(action="/upload",enctype="multipart/form-data",method="post",role="form")
+                            div(class="box-body")
+                                div(class="form-group")
+                                    input(type="file",name="upload",multiple="multiple")
+                                div(class="box-footer")
+                                    button(type="submit",class="btn btn-primary") Upload
+
+        script(src="js/jquery.js")
+        script(src="js/bootstrap.min.js")
+        script(src="js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js")
+        script(src="js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js")
+        script(src="js/AdminLTE/app.js")
+        

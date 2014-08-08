@@ -13,8 +13,8 @@ learningCurve <- function(dataset, start, end, interval, partition, column, pred
     
     train_actual <- unlist(training_dataset[column]);
     test_actual <- unlist(test_dataset[column]);
-    
     predictor_formula <- predictor(training_dataset);
+      
     train_pred <- predict(predictor_formula, type="response", training_dataset) >= z;
     test_pred <- predict(predictor_formula, type="response", test_dataset) >= z;
     
